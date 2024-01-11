@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Calculator" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Calculator" parent="Base.Theme.Calculator" />
+
+    <style name="TextAppearance.AppCompat.NumberGray" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/gray_number</item>
+        <item name="android:textSize">50dp</item>
+        <item name="android:fontFamily">@font/lateef</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.NumberExpretion" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">70dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.NumberExpretionSmall" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/gray_expretion</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+</resources>
