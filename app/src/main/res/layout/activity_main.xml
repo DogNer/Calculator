@@ -22,16 +22,14 @@
             style="@style/TextAppearance.AppCompat.NumberExpretionSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="98456+6545" />
+            android:gravity="right"/>
 
         <TextView
             android:id="@+id/input_number"
             style="@style/TextAppearance.AppCompat.NumberExpretion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right|top"
-            android:text="6545" />
+            android:gravity="right|top" />
 
     </LinearLayout>
 
@@ -54,29 +52,64 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_div"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/btn_eq" />
+                android:background="@drawable/btn_eq"
+                android:gravity="center">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_eq" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/division"/>
+            </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_mul"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/btn_eq" />
+                android:background="@drawable/btn_eq"
+                android:gravity="center" >
 
-            <androidx.appcompat.widget.AppCompatButton
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/mul"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_minus"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/btn_eq" />
+                android:background="@drawable/btn_eq"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/minus"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_plus"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_eq"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/plus"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -115,15 +148,20 @@
                 android:background="@drawable/btn_number"
                 android:text="9" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_cancel"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/brn_extion" />
+                android:background="@drawable/brn_extion"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/cancel"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -162,11 +200,19 @@
                 android:background="@drawable/btn_number"
                 android:text="6" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_delete"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/brn_extion" />
+                android:layout_margin="5dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/brn_extion"
+                    style="@style/TextAppearance.AppCompat.NumberGray"
+                    android:text="C"/>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -205,11 +251,20 @@
                 android:background="@drawable/btn_number"
                 android:text="3" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_minplus"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/brn_extion" />
+                android:background="@drawable/brn_extion"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/minus_plus"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -222,6 +277,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_zer"
                 style="@style/TextAppearance.AppCompat.NumberGray"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -235,11 +291,21 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/btn_number" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_eq"
                 android:layout_width="165dp"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/btn_eq" />
+                android:background="@drawable/btn_eq"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/equal" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </RelativeLayout>
