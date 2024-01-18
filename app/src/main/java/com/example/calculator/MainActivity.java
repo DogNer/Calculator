@@ -14,11 +14,10 @@ import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppCompatButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
     String number = "", numberSmall = "";
     TextView editText, editTextSmall, textDeleteBtn;
-    double currentNumber = 0, prevNumber = 0;
-    int prevOperation = 0, curOperation = 0;
+    double prevNumber = 0;
+    int curOperation = 0;
 
     AppCompatButton[] btnNumber = new AppCompatButton[10];
     int[] idListBtn = {R.id.btn_one, R.id.btn_two, R.id.btn_three,
@@ -30,14 +29,17 @@ public class MainActivity extends AppCompatActivity {
                              R.id.btn_delete, R.id.btn_minplus, R.id.btn_dot};
 
     char[] operation = {'/', '*', '-', '+', '='};
-    Vector<Double> numbers = new Vector<Double>();
 
     /* current operation
         1 - div
         2 - mul
         3 - minus
         4 - plus
-        5 - eq
+        5 - equal
+        6 - cancel
+        7 - delete
+        8 - minus or plus
+        9 - coma
     */
 
     @Override
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0 ; i < btnNumber.length; i++){
 
                         if(view.getId() == idListBtn[i]) {
+                            if(number.equals("0")) continue;
                             if (number.length() <= 6) {
                                 number += "" + (i + 1) % 10;
                                 editText.setText(number);
@@ -83,19 +86,19 @@ public class MainActivity extends AppCompatActivity {
                             if (checkIsDouble(Double.parseDouble(number)))
                                 numberSmall += number + operation[i];
                             else{
-                                numberSmall += "" + Math.round(Double.parseDouble(String.valueOf(number)));
+                                numberSmall += String.valueOf(Math.round(Double.parseDouble(String.valueOf(number))));
                                 numberSmall +=  operation[i];
                             }
                             editTextSmall.setText(numberSmall);
 
                             if(curOperation != 0){
                                 if (!checkIsDouble(primitiveOperstion(curOperation)))
-                                    number = "" + Math.round(Double.parseDouble(String.valueOf(primitiveOperstion(curOperation))));
-                                else number = "" + primitiveOperstion(curOperation);
+                                    number = String.valueOf(Math.round(Double.parseDouble(String.valueOf(primitiveOperstion(curOperation)))));
+                                else number = String.valueOf(primitiveOperstion(curOperation));
                                 editText.setText("" + number);
-                                currentNumber = primitiveOperstion(curOperation);
-                                if (currentNumber - Math.round(currentNumber) == 0)
-                                    currentNumber = Math.round(currentNumber);
+                                prevNumber = primitiveOperstion(curOperation);
+                                if (prevNumber - Math.round(prevNumber) == 0)
+                                    prevNumber = Math.round(prevNumber);
                                 curOperation = i + 1;
                             }
 
@@ -105,17 +108,22 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else{
                                 curOperation = i + 1;
-                                currentNumber = Double.parseDouble(String.valueOf(number));
-                                if (!checkIsDouble(currentNumber))
-                                    currentNumber = Math.round(currentNumber);
+                                prevNumber = Double.parseDouble(String.valueOf(number));
+                                if (!checkIsDouble(prevNumber))
+                                    prevNumber = Math.round(prevNumber);
                                 number = "";
                             }
                         }
                         else if (view.getId() == idListOperation[i]){
                             if(i == 5){
-                                if (number.length() > 0) {
+                                if (number.length() > 1) {
                                     number = number.substring(0, number.length() - 1);
                                     editText.setText(number);
+                                }
+
+                                else if(number.length() == 1){
+                                    number = "";
+                                    editText.setText("0");
                                 }
                             }
                             else if(i == 6){
@@ -128,19 +136,21 @@ public class MainActivity extends AppCompatActivity {
                                     number = "";
                                     numberSmall = "";
                                     editText.setText("");
-                                    currentNumber = 0;
+                                    prevNumber = 0;
                                     curOperation = 0;
                                     editTextSmall.setText("");
                                 }
                             }
                             else if (i == 7){
-                                number = String.valueOf((-Double.parseDouble(number)));
-                                if (!checkIsDouble(Double.parseDouble(number)))
-                                    number = "" + Math.round(Double.parseDouble(String.valueOf(number)));
-                                editText.setText(number);
+                                if(!number.isEmpty()) {
+                                    number = String.valueOf((-Double.parseDouble(number)));
+                                    if (!checkIsDouble(Double.parseDouble(number)))
+                                        number = "" + Math.round(Double.parseDouble(String.valueOf(number)));
+                                    editText.setText(number);
+                                }
                             }
                             else if (i == 8){
-                                if ((number.charAt(number.length() - 1) != '.') && !checkIsDouble(Double.parseDouble(number))) {
+                                if (!number.isEmpty() && (number.charAt(number.length() - 1) != '.') && !checkIsDouble(Double.parseDouble(number))) {
                                     number = "" + Math.round(Double.parseDouble(String.valueOf(number)));
                                     number += '.';
                                 }
@@ -157,13 +167,13 @@ public class MainActivity extends AppCompatActivity {
 
     private double primitiveOperstion(int i){
         if(curOperation == 1)
-            return (currentNumber / Double.parseDouble(String.valueOf(number)));
+            return (prevNumber / Double.parseDouble(String.valueOf(number)));
         else if(curOperation == 2)
-            return (currentNumber * Double.parseDouble(String.valueOf(number)));
+            return (prevNumber * Double.parseDouble(String.valueOf(number)));
         else if(curOperation == 3)
-            return (currentNumber - Double.parseDouble(String.valueOf(number)));
+            return (prevNumber - Double.parseDouble(String.valueOf(number)));
         else if(curOperation == 4)
-            return (currentNumber + Double.parseDouble(String.valueOf(number)));
+            return (prevNumber + Double.parseDouble(String.valueOf(number)));
         return -1;
     }
 
