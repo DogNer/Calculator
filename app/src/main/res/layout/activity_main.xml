@@ -206,12 +206,18 @@
                 android:layout_height="80dp"
                 android:layout_margin="5dp">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/brn_extion"
+                    android:background="@drawable/brn_extion"/>
+
+                <TextView
+                    android:id="@+id/text_del"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     style="@style/TextAppearance.AppCompat.NumberGray"
-                    android:text="C"/>
+                    android:text="C"
+                    android:gravity="center"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -285,11 +291,24 @@
                 android:background="@drawable/btn_number"
                 android:text="0" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RelativeLayout
+                android:id="@+id/btn_dot"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/btn_number" />
+                android:layout_margin="5dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/brn_extion"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/TextAppearance.AppCompat.NumberGray"
+                    android:text=","
+                    android:gravity="center"/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/btn_eq"

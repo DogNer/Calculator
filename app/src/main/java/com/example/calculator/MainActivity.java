@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     AppCompatButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
     String number = "", numberSmall = "";
-    TextView editText, editTextSmall;
+    TextView editText, editTextSmall, textDeleteBtn;
     double currentNumber = 0, prevNumber = 0;
     int prevOperation = 0, curOperation = 0;
 
@@ -24,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
     int[] idListBtn = {R.id.btn_one, R.id.btn_two, R.id.btn_three,
             R.id.btn_four, R.id.btn_five, R.id.btn_six,
             R.id.btn_seven, R.id.btn_eight, R.id.btn_nine, R.id.btn_zer};
-    RelativeLayout[] btnOperation = new RelativeLayout[8];
+    RelativeLayout[] btnOperation = new RelativeLayout[9];
     int[] idListOperation = {R.id.btn_div, R.id.btn_mul, R.id.btn_minus,
-                             R.id.btn_plus, R.id.btn_eq, R.id.btn_cancel, R.id.btn_delete, R.id.btn_minplus};
+                             R.id.btn_plus, R.id.btn_eq, R.id.btn_cancel,
+                             R.id.btn_delete, R.id.btn_minplus, R.id.btn_dot};
 
     char[] operation = {'/', '*', '-', '+', '='};
     Vector<Double> numbers = new Vector<Double>();
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.input_number);
         editTextSmall = findViewById(R.id.input_expression);
+        textDeleteBtn = findViewById(R.id.text_del);
 
         for(int i = 0 ; i < btnNumber.length ; i++)
             btnNumber[i] = findViewById (idListBtn[i]);
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                                 number += "" + (i + 1) % 10;
                                 editText.setText(number);
                             }
+                            if(textDeleteBtn.getText().equals("C"))
+                                textDeleteBtn.setText("CE");
                         }
                     }
                 }
@@ -109,14 +113,41 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else if (view.getId() == idListOperation[i]){
                             if(i == 5){
-                                number = number.substring(0, number.length() - 1);
-                                editText.setText(number);
+                                if (number.length() > 0) {
+                                    number = number.substring(0, number.length() - 1);
+                                    editText.setText(number);
+                                }
                             }
                             else if(i == 6){
-
+                                if(textDeleteBtn.getText().equals("CE")) {
+                                    number = "";
+                                    editText.setText("");
+                                    textDeleteBtn.setText("C");
+                                }
+                                else if (textDeleteBtn.getText().equals("C")){
+                                    number = "";
+                                    numberSmall = "";
+                                    editText.setText("");
+                                    currentNumber = 0;
+                                    curOperation = 0;
+                                    editTextSmall.setText("");
+                                }
                             }
-
+                            else if (i == 7){
+                                number = String.valueOf((-Double.parseDouble(number)));
+                                if (!checkIsDouble(Double.parseDouble(number)))
+                                    number = "" + Math.round(Double.parseDouble(String.valueOf(number)));
+                                editText.setText(number);
+                            }
+                            else if (i == 8){
+                                if ((number.charAt(number.length() - 1) != '.') && !checkIsDouble(Double.parseDouble(number))) {
+                                    number = "" + Math.round(Double.parseDouble(String.valueOf(number)));
+                                    number += '.';
+                                }
+                                editText.setText(number);
+                            }
                         }
+
                     }
                 }
                 // исправить откугление до 4 знака
